@@ -6,7 +6,7 @@ import os
 from sklearn.model_selection import train_test_split
 from sklearn.tree import DecisionTreeClassifier
 from sklearn.linear_model import BayesianRidge
-from sklearn.metrics import accuracy_score
+from sklearn.metrics import accuracy_score, classification_report, confusion_matrix  
 from sklearn import tree, preprocessing
 from sklearn import svm
 from subprocess import call
@@ -71,3 +71,7 @@ clf.fit(X_train, y_train)
 
 score = clf.score(X_test, y_test)
 print("score", score)
+
+y_pred = clf.predict(X_test) 
+print(confusion_matrix(y_test, y_pred))  
+print(classification_report(y_test, y_pred))  
