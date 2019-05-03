@@ -71,9 +71,3 @@ def pre_process_data(input_file, output_file):
 
 
 pre_process_data(sys.argv[1], sys.argv[2])
-
-processing_a_line('true https://example.com')
-processing_a_line('true https://example.com/')
-processing_a_line('true https://example.com/hello')
-processing_a_line('true https://example.com/hello/abc/')
-processing_a_line('true https://example.com/hello/abc/?q=123&c=342')

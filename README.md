@@ -40,7 +40,9 @@ python3 prepare_data.py data/19.gz data/19-feature.gz
 
 # simple usage 
 
-`python3 tree.py <feature_files> <host> [svm|tree]`
+`python3 tree.py <feature_files> <host> [prediction_output_file]`
+
+where `feature_files` is the output file of `prepare_data.py`; `host` is the host we care about (for now we learn host by host); `prediction_output_file` is the optional output of prediction
 
 `svm` or `tree` (default) is the learning algorithm
 
