@@ -57,7 +57,9 @@ X_train, X_test, y_train, y_test = train_test_split(
     X, Y, test_size=test_size)
 
 clf = DecisionTreeClassifier()
+logging.info("start training")
 clf.fit(X_train[:, 2:], y_train)
+logging.info("done training")
 
 score = clf.score(X_test[:, 2:], y_test)
 print("score", score)
@@ -66,7 +68,7 @@ y_pred = clf.predict(X_test[:, 2:])
 print(confusion_matrix(y_test, y_pred))
 print(classification_report(y_test, y_pred))
 
-if len(sys.argv)>3:
+if len(sys.argv) > 3:
     logging.info("Extract predicted result to %s", (sys.argv[3]))
     dummy_data1 = [y_pred, y_test, X_test[:, 0]]
     df1 = pd.DataFrame(dummy_data1).transpose()
