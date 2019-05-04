@@ -40,16 +40,4 @@ python3 prepare_data.py data/19.gz data/19-feature.gz
 
 # simple usage 
 
-`python3 tree.py <feature_files> <host> [prediction_output_file]`
-
-where `feature_files` is the output file of `prepare_data.py`; `host` is the host we care about (for now we learn host by host); `prediction_output_file` is the optional output of prediction
-
-`svm` or `tree` (default) is the learning algorithm
-
-host can be get in data.gz: 
-`zcat data.gz | awk -F'/' '{print $3}'|sort|uniq -c|sort -nrk1|less`
-
-Example
-```
-python3 tree.py data-feature.gz nhacpro.net
-```
+`python3 tree.py <feature_files> [prediction_output_file]`
