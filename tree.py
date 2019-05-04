@@ -18,7 +18,7 @@ if len(sys.argv) > 1:
     data_file = sys.argv[1]
 else:
     logging.error(
-        'usage: python3 tree.py <data-feature-file> <host> [prediction_output_file]')
+        'usage: python3 tree.py <data-feature-file> [prediction_output_file]')
     exit(-1)
 logging.info('Using feature file ' + data_file)
 
@@ -26,21 +26,9 @@ if len(sys.argv) > 2:
     host = sys.argv[2]
 else:
     logging.error(
-        'usage: python3 tree.py <data-feature-file> <host> [prediction_output_file]')
+        'usage: python3 tree.py <data-feature-file> [prediction_output_file]')
     exit(-1)
-
-if not os.path.exists('data'):
-    os.makedirs('data')
-
-input_file = 'data/' + host + '.gz'
-logging.info("Processing host: [" + host + '] data file [' + input_file + ']')
-if not os.path.isfile(input_file):
-    logging.info('Data does not exist, creating [' + input_file+']')
-    os.system('zcat ' + data_file + ' |awk \'$3=="' +
-              host + '"\' |gzip > data/' + host + '.gz')
-else:
-    logging.info('Data exists [' + input_file+']')
-data = pd.read_csv(input_file, sep=' ', header=None)
+data = pd.read_csv(data_file, sep=' ', header=None)
 print("Dataset length", len(data))
 print("Dataset shape", data.shape)
 print("Data example:")
@@ -68,10 +56,10 @@ y_pred = clf.predict(X_test[:, 2:])
 print(confusion_matrix(y_test, y_pred))
 print(classification_report(y_test, y_pred))
 
-if len(sys.argv) > 3:
-    logging.info("Extract predicted result to %s", (sys.argv[3]))
+if len(sys.argv) > 2:
+    logging.info("Extract predicted result to %s", (sys.argv[2]))
     dummy_data1 = [y_pred, y_test, X_test[:, 0]]
     df1 = pd.DataFrame(dummy_data1).transpose()
-    df1.to_csv(sys.argv[3], sep=' ', header=None, index=False)
+    df1.to_csv(sys.argv[2], sep=' ', header=None, index=False)
 
 logging.info("Done")
